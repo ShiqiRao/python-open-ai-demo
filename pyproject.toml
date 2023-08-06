@@ -1,0 +1,20 @@
+[project]
+name = "openai_api_demo"
+authors = [
+    {name = "Shiqi Rao", email = "shiqirao@outlook.com"},
+]
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.6"
+dynamic = ["version", "description"]
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+]
+
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "openai_api_demo"
