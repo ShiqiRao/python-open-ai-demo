@@ -59,27 +59,21 @@ async def dm_history(channel_id):
     return {"message": conversation_history}
 
 def chat(message_content):
-  url = "https://chat.openai-sb.com/api/chat"
+  url = "https://api.openai.com/v1/chat/completions"
 
   data = {
-	"model": {
-		"id": "gpt-3.5-turbo",
-		"name": "GPT-3.5",
-		"maxLength": 12000,
-		"tokenLimit": 4000
-	},
-	"messages": [{
-		"role": "user",
-		"content": f"{message_content}"
-	}],
-	"key": f"{API_KEY}",
-	"prompt": f'''
-I'm an English learning assistant named {BOT_NAME}. My goal is to provide simple, easy to understand explanations of English vocabulary to help beginner learners improve their English skills. 
-I will explain the meanings of English words using simple language that a beginner learner can understand. I use analogies, examples and clear descriptions to make my explanations intuitive. I am patient and supportive. I provide feedback to guide users to better understand the words.
-''',
-	"temperature": 0.5
-}
+    "model": "gpt-3.5-turbo",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant."
+      },
+      {
+        "role": "user",
+        "content": "Hello!"
+      }
+    ]
+  }
 
-  response = requests.post(url, json=data)
-
-  return response.text
+  response = requests.post(url, json=data, headers={"Content-Type": "application/json", "Authorization": f"Bearer {API_KEY}"})
+  return response.json().get("choices")[0].get("message").get("content")
