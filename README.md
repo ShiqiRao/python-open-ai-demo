@@ -10,7 +10,7 @@ This is a demo of the OpenAI API. It uses openai-sb as a wrapper for the API. Th
 2. Install flit: `pip install flit`
 3. Install dependencies: `flit install`
 
-## Run
+## Locally Run
 1. Copy config-example.json to config.json and add your API key.
 2. Start Service: 
 ```bash
@@ -19,3 +19,9 @@ uvicorn main:app --reload
 ```
 3. Access the service at http://localhost:8000
 4. API documentation is available at http://localhost:8000/docs
+
+## Deploy to AWS
+1. Install aws copilot: https://aws.github.io/copilot-cli/docs/getting-started/install/
+2. Deploy to AWS: `copilot deploy -n internet-example -e test`
+3. Access the service at the URL provided by copilot. It will be something like: http://internet-example-test.us-west-2.elb.amazonaws.com
+4. Retrieve logs: `copilot svc logs -n internet-example -e test`
